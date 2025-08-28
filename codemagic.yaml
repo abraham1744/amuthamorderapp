@@ -1,17 +1,21 @@
 workflows:
-  debug-apk:
-    name: Build Debug APK
+  react-native-apk:
+    name: Build Android APK
     max_build_duration: 60
     environment:
       vars:
-        NODE_VERSION: 18.18.2
+        NODE_VERSION: 18
+      node: $NODE_VERSION
     scripts:
       - name: Install dependencies
-        script: npm install
-      - name: Expo prebuild
-        script: npx expo prebuild
+        script: |
+          npm install
+      - name: Fix gradlew permissions
+        script: |
+          chmod +x android/gradlew
       - name: Build Debug APK
-        script: ./gradlew assembleDebug
-        working_directory: android
+        script: |
+          cd android
+          ./gradlew assembleDebug
     artifacts:
       - android/app/build/outputs/**/*.apk
