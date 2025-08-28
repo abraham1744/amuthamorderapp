@@ -11,7 +11,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { googleSheetsService, Product, Customer, OrderDetail } from'/home/project/services/GoogleSheets';
+import { googleSheetsService, Product, Customer, OrderDetail } from '../../services/GoogleSheets';
 import { Plus, Trash2, Calendar, User, Package } from 'lucide-react-native';
 
 interface OrderItem extends OrderDetail {
