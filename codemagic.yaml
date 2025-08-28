@@ -6,6 +6,7 @@ workflows:
     scripts:
       - npm install
       - npx expo install
+      - npm install buffer crypto-browserify stream-browserify util process
       - npx expo export
       - npx eas build -p android --profile preview --local
     artifacts:
