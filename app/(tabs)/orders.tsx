@@ -11,7 +11,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { googleSheetsService, Order, OrderDetail } from '/home/project/services/GoogleSheets';
+import { googleSheetsService, Order, OrderDetail } from '../../services/GoogleSheets';
 import { Check, Clock, Truck, Package, User, Calendar } from 'lucide-react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
