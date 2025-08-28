@@ -1,13 +1,17 @@
 workflows:
-  android-workflow:
-    name: Build Android APK
+  debug-apk:
+    name: Build Debug APK
+    max_build_duration: 60
     environment:
-      node: 18.18.2   # Codemagic will install Node and npm automatically
+      vars:
+        NODE_VERSION: 18.18.2
     scripts:
-      - npm install
-      - npx expo install
-      - npm install buffer crypto-browserify stream-browserify util process
-      - npx expo export
-      - npx eas build -p android --profile preview --local
+      - name: Install dependencies
+        script: npm install
+      - name: Expo prebuild
+        script: npx expo prebuild
+      - name: Build Debug APK
+        script: ./gradlew assembleDebug
+        working_directory: android
     artifacts:
-      - build/**/*
+      - android/app/build/outputs/**/*.apk
