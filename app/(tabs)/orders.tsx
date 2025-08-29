@@ -56,7 +56,9 @@ let ordersWithDetails: OrderWithDetails[] = ordersData.map(order => ({
 }));
 
       // Show all orders (both pending and delivered)
-      setOrders(ordersWithDetails);
+      // Filter out delivered orders - they should only appear in Order History
+      const pendingOrders = ordersWithDetails.filter(order => !order.delivered);
+      setOrders(pendingOrders);
 
       calculateStats(ordersWithDetails, allOrderDetails);
     } catch (error) {
