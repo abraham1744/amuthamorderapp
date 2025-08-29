@@ -72,7 +72,7 @@ export default function CreateOrderScreen() {
               updatedItem.subtotal = updatedItem.quantity * product.price;
             }
           } else if (field === 'quantity') {
-            updatedItem.subtotal = value * item.price;
+           updatedItem.subtotal = (value || 0) * item.price;
           }
           
           return updatedItem;
@@ -281,8 +281,14 @@ export default function CreateOrderScreen() {
                   <Text style={styles.label}>Quantity</Text>
                   <TextInput
                     style={styles.quantityInput}
-                    value={item.quantity.toString()}
-                    onChangeText={text => updateOrderItem(item.id, 'quantity', parseFloat(text) || 0)}
+                   value={item.quantity === 0 ? '' : item.quantity.toString()}
+                   onChangeText={text => {
+                     // Allow empty string, numbers, and decimal points
+                     if (text === '' || /^\d*\.?\d*$/.test(text)) {
+                       const numValue = text === '' ? 0 : parseFloat(text) || 0;
+                       updateOrderItem(item.id, 'quantity', numValue);
+                     }
+                   }}
                     keyboardType="decimal-pad"
                     placeholder="0"
                   />
