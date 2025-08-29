@@ -194,7 +194,7 @@ class GoogleSheetsService {
         customerName: row[1] || '',
         invoiceDate: row[2] || '',
         deliveryDate: row[3] || '',
-        totalQuantity: parseInt(row[4]) || 0,
+        totalQuantity: parseFloat(row[4]) || 0,
         totalPrice: parseFloat(row[5]) || 0,
         status: row[6] || 'Pending',
         delivered: row[7] === 'TRUE' || row[7] === 'true',
@@ -248,7 +248,7 @@ class GoogleSheetsService {
       const details = rows.slice(1).map((row: string[]) => ({
         orderId: row[0] || '',
         productName: row[1] || '',
-        quantity: parseInt(row[2]) || 0,
+        quantity: parseFloat(row[2]) || 0,
         price: parseFloat(row[3]) || 0,
         subtotal: parseFloat(row[4]) || 0,
       }));
@@ -285,7 +285,7 @@ class GoogleSheetsService {
         customerName: row[1] || '',
         invoiceDate: row[2] || '',
         deliveryDate: row[3] || '',
-        totalQuantity: parseInt(row[4]) || 0,
+        totalQuantity: parseFloat(row[4]) || 0,
         totalPrice: parseFloat(row[5]) || 0,
         status: row[6] || '',
         delivered: row[7] === 'TRUE' || row[7] === 'true',

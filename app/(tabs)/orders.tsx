@@ -55,10 +55,9 @@ let ordersWithDetails: OrderWithDetails[] = ordersData.map(order => ({
   details: allOrderDetails.filter(detail => detail.orderId === order.orderId),
 }));
 
-// ❌ Don't show delivered orders on this screen
-ordersWithDetails = ordersWithDetails.filter(order => !order.delivered);
+    // ❌ Don't show delivered orders on this screen
+    ordersWithDetails = ordersWithDetails.filter(order => !order.delivered);
 
-setOrders(ordersWithDetails);
       calculateStats(ordersWithDetails, allOrderDetails);
     } catch (error) {
       Alert.alert('Error', 'Failed to load orders from Google Sheets.');
