@@ -16,6 +16,7 @@ import { Plus, Trash2, Calendar, User, Package } from 'lucide-react-native';
 
 interface OrderItem extends OrderDetail {
   id: string;
+  quantityText: string; // Add text representation for input
 }
 
 export default function CreateOrderScreen() {
@@ -55,6 +56,7 @@ export default function CreateOrderScreen() {
       quantity: 1,
       price: 0,
       subtotal: 0,
+      quantityText: '1',
     };
     setOrderItems([...orderItems, newItem]);
   };
@@ -71,8 +73,12 @@ export default function CreateOrderScreen() {
               updatedItem.price = product.price;
               updatedItem.subtotal = updatedItem.quantity * product.price;
             }
-          } else if (field === 'quantity') {
-           updatedItem.subtotal = (value || 0) * item.price;
+          } else if (field === 'quantityText') {
+            // Update both text and numeric value
+            updatedItem.quantityText = value;
+            const numericValue = value === '' ? 0 : parseFloat(value) || 0;
+            updatedItem.quantity = numericValue;
+            updatedItem.subtotal = numericValue * item.price;
           }
           
           return updatedItem;
@@ -281,14 +287,13 @@ export default function CreateOrderScreen() {
                   <Text style={styles.label}>Quantity</Text>
                   <TextInput
                     style={styles.quantityInput}
-                   value={item.quantity === 0 ? '' : item.quantity.toString()}
-                   onChangeText={text => {
-                     // Allow empty string, numbers, and decimal points
-                     if (text === '' || /^\d*\.?\d*$/.test(text)) {
-                       const numValue = text === '' ? 0 : parseFloat(text) || 0;
-                       updateOrderItem(item.id, 'quantity', numValue);
-                     }
-                   }}
+                    value={item.quantityText}
+                    onChangeText={text => {
+                      // Allow empty string, numbers, and decimal points
+                      if (text === '' || /^\d*\.?\d*$/.test(text)) {
+                        updateOrderItem(item.id, 'quantityText', text);
+                      }
+                    }}
                     keyboardType="decimal-pad"
                     placeholder="0"
                   />
