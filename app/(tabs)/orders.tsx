@@ -55,8 +55,8 @@ let ordersWithDetails: OrderWithDetails[] = ordersData.map(order => ({
   details: allOrderDetails.filter(detail => detail.orderId === order.orderId),
 }));
 
-    // ❌ Don't show delivered orders on this screen
-    ordersWithDetails = ordersWithDetails.filter(order => !order.delivered);
+      // Show all orders (both pending and delivered)
+      setOrders(ordersWithDetails);
 
       calculateStats(ordersWithDetails, allOrderDetails);
     } catch (error) {
