@@ -282,8 +282,8 @@ export default function CreateOrderScreen() {
                   <TextInput
                     style={styles.quantityInput}
                     value={item.quantity.toString()}
-                    onChangeText={text => updateOrderItem(item.id, 'quantity', parseInt(text) || 0)}
-                    keyboardType="numeric"
+                    onChangeText={text => updateOrderItem(item.id, 'quantity', parseFloat(text) || 0)}
+                    keyboardType="decimal-pad"
                     placeholder="0"
                   />
                 </View>
